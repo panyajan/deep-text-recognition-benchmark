@@ -216,9 +216,9 @@ def train(opt):
                 log.write(predicted_result_log + '\n')
 
         # save model per 1e+5 iter.
-        if (iteration + 1) % 1e+5 == 0:
-            torch.save(
-                model.state_dict(), f'./saved_models/{opt.exp_name}/iter_{iteration+1}.pth')
+        if (iteration + 1) % 5000 == 0:
+            torch.save(model.state_dict(), f'./saved_models/{opt.exp_name}/iter_{iteration+1}.pth')
+            print(f'>>> Iteration {iteration+1} of {opt.num_iter} saved models completed')
 
         if (iteration + 1) == opt.num_iter:
             print('end the training')
