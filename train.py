@@ -143,6 +143,7 @@ def train(opt):
     iteration = start_iter
 
     while(True):
+        iter_start_time = time.time()
         # train part
         image_tensors, labels = train_dataset.get_batch()
         image = image_tensors.to(device)
@@ -170,6 +171,11 @@ def train(opt):
         optimizer.step()
 
         loss_avg.add(cost)
+
+        iter_end_time = time.time()
+        iter_duration = iter_end_time - iter_start_time
+
+        print(f"[Iter {iteration + 1}] Training iteration took {iter_duration:.4f} seconds")
 
         # validation part
         if (iteration + 1) % opt.valInterval == 0 or iteration == 0: # To see training progress, we also conduct validation when 'iteration == 0' 
